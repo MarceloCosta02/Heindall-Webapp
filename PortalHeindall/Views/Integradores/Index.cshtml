@@ -1,0 +1,77 @@
+﻿@model IEnumerable<PortalHeindall.Models.Integrador>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IntegradorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IntegradorNome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrupoUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrupoPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrupoPort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublicKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrivateKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grupo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IntegradorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IntegradorNome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrupoUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrupoPassword)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrupoPort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublicKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrivateKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grupo.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

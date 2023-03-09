@@ -1,0 +1,79 @@
+﻿@model PortalHeindall.Models.Grupo
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Grupo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="GrupoId" />
+            <div class="form-group">
+                <label asp-for="GrupoName" class="control-label"></label>
+                <input asp-for="GrupoName" class="form-control" />
+                <span asp-validation-for="GrupoName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrupoDescription" class="control-label"></label>
+                <input asp-for="GrupoDescription" class="form-control" />
+                <span asp-validation-for="GrupoDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrupoType" class="control-label"></label>
+                <input asp-for="GrupoType" class="form-control" />
+                <span asp-validation-for="GrupoType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrupoMetodo" class="control-label"></label>
+                <input asp-for="GrupoMetodo" class="form-control" />
+                <span asp-validation-for="GrupoMetodo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrupoURL" class="control-label"></label>
+                <input asp-for="GrupoURL" class="form-control" />
+                <span asp-validation-for="GrupoURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrupoUser" class="control-label"></label>
+                <input asp-for="GrupoUser" class="form-control" />
+                <span asp-validation-for="GrupoUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrupoPassword" class="control-label"></label>
+                <input asp-for="GrupoPassword" class="form-control" />
+                <span asp-validation-for="GrupoPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrupoPort" class="control-label"></label>
+                <input asp-for="GrupoPort" class="form-control" />
+                <span asp-validation-for="GrupoPort" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PublicKey" class="control-label"></label>
+                <input asp-for="PublicKey" class="form-control" />
+                <span asp-validation-for="PublicKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrivateKey" class="control-label"></label>
+                <input asp-for="PrivateKey" class="form-control" />
+                <span asp-validation-for="PrivateKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

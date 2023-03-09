@@ -1,0 +1,36 @@
+﻿Atualizado em 08/03/2023
+
+
+MaxBennu23/Portal_Heindall 
+
+App WEb ASPNET Core MVC em .NET7 
+Preciso :
+# Hospedar o WebApp e a API na Hostinger
+
+
+Add-Migration Alteracao-Integradres -Context UsuarioContext
+Update-Database -Context UsuarioContext
+
+
+
+# Colocar a validação de banco de dados, que esta em Program no arquivo json
+OU em uma atabela do banco de dados de maneira qeu seja possivel trocar az sednhaz do banco sem precisa  acessar o cod,go
+
+# Fazer o botao ( importar todos os integradores ) chamar a API hospedada na Hostinger
+
+# Criar validacao de usuario pelo Identity no WebApp salvando dados de acesso no
+banco de dados Mysql u839385910_heindall
+
+# Adicionar/relacionar campo de "banco de destino" ao usuario logado 
+seja : server=185.239.210.205;initial catalog=u839385910_cliente01;uid=u839385910_cliente01;pwd=ClienteDestino1@
+
+# Nos relacionamentos entre as models, aparece só o numero index ( ex. Grupo/Integrador). 
+Fazer aparecer o nome do Grupo, ao cadastrar o Integrador
+
+# Adicionar/relacionar tabela "integradores do usuario" ao usuario logado.
+De maneira que : 
+- Usuario ADMIN faça cadastro de tudo.
+- Usuario CLIENTE acesse o WebApp e tenha acesso apenas ao botao "azuldomeio"
+
+# Botao azuldomeio : Pede ao usuario para informar a data ( necessaria na consulta da API Rextur)
+em seguida executa a API e persiste os dados no BANCO DE DADOS DE DESTINO cadastrado em dados do Usuario 

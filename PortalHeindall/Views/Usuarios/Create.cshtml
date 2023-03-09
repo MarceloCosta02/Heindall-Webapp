@@ -1,0 +1,58 @@
+﻿@model PortalHeindall.Models.Usuario
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UsuarioId" class="control-label"></label>
+                <input asp-for="UsuarioId" class="form-control" />
+                <span asp-validation-for="UsuarioId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioName" class="control-label"></label>
+                <input asp-for="UsuarioName" class="form-control" />
+                <span asp-validation-for="UsuarioName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioIDAgencia" class="control-label"></label>
+                <input asp-for="UsuarioIDAgencia" class="form-control" />
+                <span asp-validation-for="UsuarioIDAgencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioCNPJ" class="control-label"></label>
+                <input asp-for="UsuarioCNPJ" class="form-control" />
+                <span asp-validation-for="UsuarioCNPJ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioNivel" class="control-label"></label>
+                <input asp-for="UsuarioNivel" class="form-control" />
+                <span asp-validation-for="UsuarioNivel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioBancoDestino" class="control-label"></label>
+                <input asp-for="UsuarioBancoDestino" class="form-control" />
+                <span asp-validation-for="UsuarioBancoDestino" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
