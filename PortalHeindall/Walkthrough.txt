@@ -1,15 +1,15 @@
-﻿Atualizado em 08/03/2023
+﻿Atualizado em 13/03/2023
 
-
-MaxBennu23/Portal_Heindall 
+GITHUB : MaxBennu23/Portal_Heindall 
 
 App WEb ASPNET Core MVC em .NET7 
 Preciso :
-# Hospedar o WebApp e a API na Hostinger
+
+# Hospedar o WebApp e a API na VPS da Hostinger
 
 
-Add-Migration Alteracao-Integradres -Context UsuarioContext
-Update-Database -Context UsuarioContext
+Add-Migration Alteracao-Ajustes -Context GrupoContext
+Update-Database -Context GrupoContext
 
 
 

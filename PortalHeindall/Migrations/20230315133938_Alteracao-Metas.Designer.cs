@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortalHeindall.Data;
 
@@ -10,9 +11,11 @@ using PortalHeindall.Data;
 namespace AppHeindall.Migrations
 {
     [DbContext(typeof(GrupoContext))]
-    partial class GrupoContextModelSnapshot : ModelSnapshot
+    [Migration("20230315133938_Alteracao-Metas")]
+    partial class AlteracaoMetas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace AppHeindall.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Metas");
+                    b.ToTable("Meta");
                 });
 
             modelBuilder.Entity("IntegradorUsuario", b =>

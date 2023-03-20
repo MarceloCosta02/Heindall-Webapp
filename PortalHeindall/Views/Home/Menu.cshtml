@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container">
+	<img src="~/img/Linfotur.jpg" width="150" height="100" class="d-inline-block align-top" alt="logo">
+</div>
+<div class="text-center">
+    <h1 class="display-4">Cadastros</h1>
+	<br>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<button class="btn btn-secondary btn-custom" onclick="window.location.href='@Url.Action("Index", "Grupos")'">Grupos</button>
+			<button class="btn btn-secondary btn-custom" onclick="window.location.href='@Url.Action("Index", "Integradores")'">Integradores</button>
+			<button class="btn btn-secondary btn-custom" onclick="window.location.href='@Url.Action("Index", "Usuarios")'">Usuarios</button>
+		</div>
+		<div class="col">
+			<button class="btn btn-secondary btn-custom" onclick="window.location.href='@Url.Action("Index", "IntegradoresdoUsuario")'">UsuariosIntegr</button>
+			<button class="btn btn-secondary btn-custom" onclick="window.location.href='@Url.Action("Index", "About")'">Duvidas</button>
+			<button class="btn btn-secondary btn-custom" onclick="window.location.href='@Url.Action("Index", "Home")'">Voltar</button>
+		</div>
+	</div>
+</div>
+<br>
+<div>
+	<footer class="footer">
+		<div class="container">
+			<img src="~/img/icones_embaixo.jpg" width="750" height="100" class="d-inline-block align-top" alt="logo">
+		</div>
+	</footer>
+</div>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PortalHeindall.Models;
+using AppHeindall.Models;
 
 namespace PortalHeindall.Data
 {
@@ -9,11 +10,10 @@ namespace PortalHeindall.Data
         : base(options) => Database.EnsureCreated();
 
         public DbSet<Grupo> Grupos { get; set; }
-
 		public DbSet<Integrador> Integradores { get; set; }
 		public DbSet<Usuario> Usuarios { get; set; }
-
 		public DbSet<IntegradordoUsuario> IntegradoresdoUsuario { get; set; }
+		public DbSet<Meta> Metas { get; set; }
 
 	}
 }
