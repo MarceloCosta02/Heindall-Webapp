@@ -1,33 +1,21 @@
-using Microsoft.EntityFrameworkCore;
-using PortalHeindall.Data;
+using AppHeindall.Interfaces;
+using AppHeindall.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
+builder.Services.AddHttpClient();
 
-///////////////////
-
-/* builder.Services.AddDbContext<GrupoContext>
-   (options => options.UseMySql(
-       "server=localhost;initial catalog=heindall;uid=root;pwd=123456",
-       Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.2.42-mysql")));*/
-
-
-builder.Services.AddDbContext<GrupoContext>
-    (options => options.UseMySql(
-        "server=185.239.210.205;initial catalog=u839385910_heindall;uid=u839385910_heindall;pwd=Aa@heindall23",
-        Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.05.00-MariaDB")));
-
-/////////////////////
-
-
+builder.Services.AddScoped<IGrupoService, GrupoService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IMetaService, MetaService>();
+builder.Services.AddScoped<IIntegradorDoUsuarioService, IntegradorDoUsuarioService>();
+builder.Services.AddScoped<IIntegradorService, IntegradorService>();
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -36,8 +24,6 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

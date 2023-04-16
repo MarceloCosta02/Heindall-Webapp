@@ -1,161 +1,129 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using AppHeindall.Models;
-using PortalHeindall.Data;
+using AppHeindall.Interfaces;
+using System.Text.RegularExpressions;
 
-namespace AppHeindall.Controllers
+namespace AppHeindall.Controllers;
+
+public class MetasController : Controller
 {
-    public class MetasController : Controller
-    {
-        private readonly GrupoContext _context;
+	private readonly IMetaService _service;
 
-        public MetasController(GrupoContext context)
-        {
-            _context = context;
-        }
+	public MetasController(IMetaService service)
+	{
+		_service = service;
+	}
 
-        // GET: Metas
-        public async Task<IActionResult> Index()
-        {
-              return View(await _context.Metas.ToListAsync());
-        }
+	// GET: Metas
+	public async Task<IActionResult> Index()
+	{
+		var metas = await _service.Obter();
 
-        // GET: Metas/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Metas == null)
-            {
-                return NotFound();
-            }
+		if (metas is null)
+			return Problem("Não existem metas a serem exibidos");
 
-            var meta = await _context.Metas
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (meta == null)
-            {
-                return NotFound();
-            }
+		return View(metas);
+	}
 
-            return View(meta);
-        }
+	// GET: Metas/Details/5
+	public async Task<IActionResult> Details(int? id)
+	{
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
 
-        // GET: Metas/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+		var meta = await _service.ObterPorId(id.Value);
 
-        // POST: Metas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Prioridade,Projeto,Start,Finish,Demanda,Pendencia")] Meta meta)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(meta);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(meta);
-        }
+		if (meta == null)
+			return NotFound($"Não foi encontrado uma meta com id {id}");
 
-        // GET: Metas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Metas == null)
-            {
-                return NotFound();
-            }
+		return View(meta);
+	}
 
-            var meta = await _context.Metas.FindAsync(id);
-            if (meta == null)
-            {
-                return NotFound();
-            }
-            return View(meta);
-        }
+	// GET: Metas/Create
+	public IActionResult Create()
+	{
+		return View();
+	}
 
-        // POST: Metas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Prioridade,Projeto,Start,Finish,Demanda,Pendencia")] Meta meta)
-        {
-            if (id != meta.Id)
-            {
-                return NotFound();
-            }
+	// POST: Metas/Create
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> Create([Bind("Id,Prioridade,Projeto,Start,Finish,Demanda,Pendencia")] Meta meta)
+	{
+		if (ModelState.IsValid)
+		{
+			await _service.Criar(meta);
+			return RedirectToAction(nameof(Index));
+		}
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(meta);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MetaExists(meta.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(meta);
-        }
+		return View(meta);
+	}
 
-        // GET: Metas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Metas == null)
-            {
-                return NotFound();
-            }
+	// GET: Metas/Edit/5
+	public async Task<IActionResult> Edit(int? id)
+	{
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
 
-            var meta = await _context.Metas
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (meta == null)
-            {
-                return NotFound();
-            }
+		var meta = await _service.ObterPorId(id.Value);
 
-            return View(meta);
-        }
+		if (meta == null)
+			return NotFound($"Não foi encontrado um meta com id {id}");
 
-        // POST: Metas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Metas == null)
-            {
-                return Problem("Entity set 'GrupoContext.Metas'  is null.");
-            }
-            var meta = await _context.Metas.FindAsync(id);
-            if (meta != null)
-            {
-                _context.Metas.Remove(meta);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+		return View(meta);
+	}
 
-        private bool MetaExists(int id)
-        {
-          return _context.Metas.Any(e => e.Id == id);
-        }
-    }
+	// POST: Metas/Edit/5
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> Edit(int id, [Bind("Id,Prioridade,Projeto,Start,Finish,Demanda,Pendencia")] Meta meta)
+	{
+		if (id != meta.Id)
+			return NotFound("Ids divergentes");
+
+		if (ModelState.IsValid)
+		{
+			try
+			{
+				await _service.Atualizar(id, meta);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+
+			return RedirectToAction(nameof(Index));
+		}
+
+		return View(meta);
+	}
+
+	// GET: Metas/Delete/5
+	public async Task<IActionResult> Delete(int? id)
+	{
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
+
+		var meta = await _service.ObterPorId(id.Value);
+
+		if (meta == null)
+			return NotFound($"Não foi encontrado uma meta com id {id}");
+
+		return View(meta);
+	}
+
+	// POST: Metas/Delete/5
+	[HttpPost, ActionName("Delete")]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> DeleteConfirmed(int id)
+	{
+		var meta = await _service.ObterPorId(id);
+
+		if (meta != null)
+		{
+			await _service.Remover(id);
+		}
+
+		return RedirectToAction(nameof(Index));
+	}
 }

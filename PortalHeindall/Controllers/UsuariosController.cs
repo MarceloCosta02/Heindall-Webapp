@@ -1,161 +1,129 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AppHeindall.Interfaces;
+using AppHeindall.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using PortalHeindall.Data;
-using PortalHeindall.Models;
+using System.Text.RegularExpressions;
 
-namespace AppHeindall.Controllers
+namespace AppHeindall.Controllers;
+
+public class UsuariosController : Controller
 {
-    public class UsuariosController : Controller
-    {
-        private readonly GrupoContext _context;
+	private readonly IUsuarioService _service;
 
-        public UsuariosController(GrupoContext context)
-        {
-            _context = context;
-        }
+	public UsuariosController(IUsuarioService service)
+	{
+		_service = service;
+	}
 
-        // GET: Usuarios
-        public async Task<IActionResult> Index()
-        {
-              return View(await _context.Usuarios.ToListAsync());
-        }
+	// GET: Usuarios
+	public async Task<IActionResult> Index()
+	{
+		var usuarios = await _service.Obter();
 
-        // GET: Usuarios/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Usuarios == null)
-            {
-                return NotFound();
-            }
+		if (usuarios is null)
+			return Problem("Não existem usuarios a serem exibidos");
 
-            var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
+		return View(usuarios);
+	}
 
-            return View(usuario);
-        }
+	// GET: Usuarios/Details/5
+	public async Task<IActionResult> Details(int? id)
+	{
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
 
-        // GET: Usuarios/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+		var usuario = await _service.ObterPorId(id.Value);
 
-        // POST: Usuarios/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UsuarioId,UsuarioName,UsuarioIDAgencia,UsuarioCNPJ,UsuarioNivel,UsuarioBancoDestino")] Usuario usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(usuario);
-        }
+		if (usuario == null)
+			return NotFound($"Não foi encontrado um usuario com id {id}");
 
-        // GET: Usuarios/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Usuarios == null)
-            {
-                return NotFound();
-            }
+		return View(usuario);
+	}
 
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-            return View(usuario);
-        }
+	// GET: Usuarios/Create
+	public IActionResult Create()
+	{
+		return View();
+	}
 
-        // POST: Usuarios/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,UsuarioName,UsuarioIDAgencia,UsuarioCNPJ,UsuarioNivel,UsuarioBancoDestino")] Usuario usuario)
-        {
-            if (id != usuario.Id)
-            {
-                return NotFound();
-            }
+	// POST: Usuarios/Create
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> Create([Bind("Id,UsuarioId,UsuarioName,UsuarioIDAgencia,UsuarioCNPJ,UsuarioNivel,UsuarioBancoDestino")] Usuario usuario)
+	{
+		if (ModelState.IsValid)
+		{
+			await _service.Criar(usuario);
+			return RedirectToAction(nameof(Index));
+		}
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(usuario);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UsuarioExists(usuario.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(usuario);
-        }
+		return View(usuario);
+	}
 
-        // GET: Usuarios/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Usuarios == null)
-            {
-                return NotFound();
-            }
+	// GET: Usuarios/Edit/5
+	public async Task<IActionResult> Edit(int? id)
+	{
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
 
-            var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
+		var usuario = await _service.ObterPorId(id.Value);
 
-            return View(usuario);
-        }
+		if (usuario == null)
+			return NotFound($"Não foi encontrado um usuario com id {id}");
 
-        // POST: Usuarios/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Usuarios == null)
-            {
-                return Problem("Entity set 'GrupoContext.Usuarios'  is null.");
-            }
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario != null)
-            {
-                _context.Usuarios.Remove(usuario);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+		return View(usuario);
+	}
 
-        private bool UsuarioExists(int id)
-        {
-          return _context.Usuarios.Any(e => e.Id == id);
-        }
-    }
+	// POST: Usuarios/Edit/5
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,UsuarioName,UsuarioIDAgencia,UsuarioCNPJ,UsuarioNivel,UsuarioBancoDestino")] Usuario usuario)
+	{
+		if (id != usuario.Id)
+			return NotFound("Ids divergentes");
+
+		if (ModelState.IsValid)
+		{
+			try
+			{
+				await _service.Atualizar(id, usuario);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+
+			return RedirectToAction(nameof(Index));
+		}
+
+		return View(usuario);
+	}
+
+	// GET: Usuarios/Delete/5
+	public async Task<IActionResult> Delete(int? id)
+	{
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
+
+		var usuario = await _service.ObterPorId(id.Value);
+
+		if (usuario == null)
+			return NotFound($"Não foi encontrado um usuario com id {id}");
+
+		return View(usuario);
+	}
+
+	// POST: Usuarios/Delete/5
+	[HttpPost, ActionName("Delete")]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> DeleteConfirmed(int id)
+	{
+		var usuario = await _service.ObterPorId(id);
+
+		if (usuario != null)
+		{
+			await _service.Remover(id);
+		}
+
+		return RedirectToAction(nameof(Index));
+	}
 }
