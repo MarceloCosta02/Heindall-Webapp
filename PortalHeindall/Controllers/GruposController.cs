@@ -75,9 +75,9 @@ public class GruposController : Controller
 	// POST: Grupos/Edit/5
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Edit(int id, [Bind("GrupoId,GrupoName,GrupoDescription,GrupoType,GrupoMetodo,GrupoURL,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey")] Grupo grupo)
+	public async Task<IActionResult> Edit(int id, [Bind("Id,GrupoName,GrupoDescription,GrupoType,GrupoMetodo,GrupoURL,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey")] Grupo grupo)
 	{
-		if (id != grupo.GrupoId)		
+		if (id != grupo.Id)		
 			return NotFound("Ids divergentes");		
 
 		if (ModelState.IsValid)

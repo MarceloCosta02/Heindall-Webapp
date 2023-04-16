@@ -3,7 +3,6 @@
 public class Grupo
 {
 	public int Id { get; set; }
-	public int GrupoId { get; set; }
 	public string GrupoName { get; set; }
 	public string GrupoDescription { get; set; }
 	public string GrupoArea { get; set; }

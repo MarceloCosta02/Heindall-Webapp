@@ -1,5 +1,10 @@
-﻿using AppHeindall.Interfaces;
+﻿using AppHeindall.Enums;
+using AppHeindall.Extensions;
+using AppHeindall.Interfaces;
 using AppHeindall.Models;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace AppHeindall.Services;
 
@@ -12,28 +17,65 @@ public class IntegradorService : IIntegradorService
 		_httpClient = httpClient;
 	}
 
-	public Task<IEnumerable<Integrador>> Obter()
+	public async Task<IEnumerable<Integrador>> Obter()
 	{
-		throw new NotImplementedException();
+		string url = $"{Endpoints.Integradores.Descricao()}";
+
+		var response = await _httpClient.GetAsync(url);
+
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
+
+		var integradores = JsonConvert.DeserializeObject<IEnumerable<Integrador>>(await response.Content.ReadAsStringAsync());
+
+		return integradores;
 	}
 
-	public Task<Integrador> ObterPorId(int id)
+	public async Task<Integrador> ObterPorId(int id)
 	{
-		throw new NotImplementedException();
+		string url = $"{Endpoints.IntegradoresObterPorId.Descricao()}?id={id}";
+
+		var response = await _httpClient.GetAsync(url);
+
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
+
+		var integrador = JsonConvert.DeserializeObject<Integrador>(await response.Content.ReadAsStringAsync());
+
+		return integrador;
 	}
 
-	public Task Criar(Integrador item)
+	public async Task Criar(Integrador item)
 	{
-		throw new NotImplementedException();
+		string url = $"{Endpoints.Integradores.Descricao()}";
+
+		var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
+
+		var response = await _httpClient.PostAsync(url, content);
+
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
 	}
 
-	public Task Atualizar(int id, Integrador item)
+	public async Task Atualizar(int id, Integrador item)
 	{
-		throw new NotImplementedException();
+		string url = $"{Endpoints.Integradores.Descricao()}";
+
+		var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
+
+		var response = await _httpClient.PutAsync(url, content);
+
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
 	}
 
-	public Task Remover(int id)
+	public async Task Remover(int id)
 	{
-		throw new NotImplementedException();
+		string url = $"{Endpoints.Integradores.Descricao()}?id={id}";
+
+		var response = await _httpClient.DeleteAsync(url);
+
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
 	}
 }

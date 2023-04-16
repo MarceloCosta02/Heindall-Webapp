@@ -1,5 +1,11 @@
-﻿using AppHeindall.Interfaces;
+﻿using AppHeindall.Enums;
+using AppHeindall.Extensions;
+using AppHeindall.Interfaces;
 using AppHeindall.Models;
+using Newtonsoft.Json;
+using System.Diagnostics.Metrics;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace AppHeindall.Services;
 
@@ -12,28 +18,65 @@ public class MetaService : IMetaService
 		_httpClient = httpClient;
 	}
 
-	public Task<IEnumerable<Meta>> Obter()
+	public async Task<IEnumerable<Meta>> Obter()
 	{
-		throw new NotImplementedException();
+		string url = $"{Endpoints.Metas.Descricao()}";
+
+		var response = await _httpClient.GetAsync(url);
+
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
+
+		var metas = JsonConvert.DeserializeObject<IEnumerable<Meta>>(await response.Content.ReadAsStringAsync());
+
+		return metas;
 	}
 
-	public Task<Meta> ObterPorId(int id)
+	public async Task<Meta> ObterPorId(int id)
 	{
-		throw new NotImplementedException();
+		string url = $"{Endpoints.MetasObterPorId.Descricao()}?id={id}";
+
+		var response = await _httpClient.GetAsync(url);
+
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
+
+		var meta = JsonConvert.DeserializeObject<Meta>(await response.Content.ReadAsStringAsync());
+
+		return meta;
 	}
 
-	public Task Criar(Meta item)
+	public async Task Criar(Meta item)
 	{
-		throw new NotImplementedException();
+		string url = $"{Endpoints.Metas.Descricao()}";
+
+		var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
+
+		var response = await _httpClient.PostAsync(url, content);
+
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
 	}
 
-	public Task Atualizar(int id, Meta item)
+	public async Task Atualizar(int id, Meta item)
 	{
-		throw new NotImplementedException();
+		string url = $"{Endpoints.Metas.Descricao()}";
+
+		var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
+
+		var response = await _httpClient.PutAsync(url, content);
+
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
 	}
 
-	public Task Remover(int id)
+	public async Task Remover(int id)
 	{
-		throw new NotImplementedException();
+		string url = $"{Endpoints.Metas.Descricao()}?id={id}";
+
+		var response = await _httpClient.DeleteAsync(url);
+
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
 	}
 }

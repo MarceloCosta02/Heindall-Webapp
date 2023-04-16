@@ -1,27 +1,34 @@
 using AppHeindall.Interfaces;
 using AppHeindall.Services;
 using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddScoped<IGrupoService, GrupoService>();
-builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-builder.Services.AddScoped<IMetaService, MetaService>();
-builder.Services.AddScoped<IIntegradorDoUsuarioService, IntegradorDoUsuarioService>();
-builder.Services.AddScoped<IIntegradorService, IntegradorService>();
+builder.Services.AddHttpClient<IGrupoService, GrupoService>(services =>
+            services.BaseAddress = new Uri(builder.Configuration.GetSection("AppSettings:UrlLocal").Value));
+
+builder.Services.AddHttpClient<IIntegradorDoUsuarioService, IntegradorDoUsuarioService>(services =>
+            services.BaseAddress = new Uri(builder.Configuration.GetSection("AppSettings:UrlLocal").Value));
+
+builder.Services.AddHttpClient<IIntegradorService, IntegradorService>(services =>
+            services.BaseAddress = new Uri(builder.Configuration.GetSection("AppSettings:UrlLocal").Value));
+
+builder.Services.AddHttpClient<IMetaService, MetaService>(services =>
+            services.BaseAddress = new Uri(builder.Configuration.GetSection("AppSettings:UrlLocal").Value));
+
+builder.Services.AddHttpClient<IUsuarioService, UsuarioService>(services =>
+            services.BaseAddress = new Uri(builder.Configuration.GetSection("AppSettings:UrlLocal").Value));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
