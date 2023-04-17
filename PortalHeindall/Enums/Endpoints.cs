@@ -4,53 +4,60 @@ namespace AppHeindall.Enums;
 
 public enum Endpoints
 {
-    #region Grupos
+	#region Grupos
 
-    [Description("grupos")]
-    Grupos,
+	[Description("grupos")]
+	Grupos,
 
-    [Description("grupos/obterPorId")]
-    GruposObterPorId,
+	[Description("grupos/obterPorId")]
+	GruposObterPorId,
 
-    #endregion Grupos
+	#endregion Grupos
 
-    #region Usuários
+	#region Usuários
 
-    [Description("usuarios")]
-    Usuarios,
+	[Description("usuarios")]
+	Usuarios,
 
-    [Description("usuarios/obterPorId")]
-    UsuariosObterPorId,
+	[Description("usuarios/obterPorId")]
+	UsuariosObterPorId,
 
-    #endregion Usuários
+	#endregion Usuários
 
-    #region Metas
+	#region Metas
 
-    [Description("metas")]
-    Metas,
+	[Description("metas")]
+	Metas,
 
-    [Description("metas/obterPorId")]
-    MetasObterPorId,
+	[Description("metas/obterPorId")]
+	MetasObterPorId,
 
-    #endregion Metas
+	#endregion Metas
 
-    #region Integradores
+	#region Integradores
 
-    [Description("integradores")]
-    Integradores,
+	[Description("integradores")]
+	Integradores,
 
-    [Description("integradores/obterPorId")]
-    IntegradoresObterPorId,
+	[Description("integradores/obterPorId")]
+	IntegradoresObterPorId,
 
-    #endregion Integradores
+	#endregion Integradores
 
-    #region IntegradoresDoUsuario
+	#region IntegradoresDoUsuario
 
-    [Description("integradoresDoUsuario")]
-    IntegradoresDoUsuario,
+	[Description("integradoresDoUsuario")]
+	IntegradoresDoUsuario,
 
-    [Description("integradoresDoUsuario/obterPorId")]
-    IntegradoresDoUsuarioObterPorId,
+	[Description("integradoresDoUsuario/obterPorId")]
+	IntegradoresDoUsuarioObterPorId,
 
-    #endregion IntegradoresDoUsuario
+	#endregion IntegradoresDoUsuario
+
+	#region Importacao
+
+	[Description("importacao/rextur")]
+	ImportacaoRextur,
+
+	#endregion Importacao
 }

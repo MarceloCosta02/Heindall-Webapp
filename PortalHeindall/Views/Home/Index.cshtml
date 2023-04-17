@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Inicio ";
+	ViewData["Title"] = "Inicio ";
 }
 <div class="container">
 	<img src="~/img/Linfotur.jpg" width="150" height="100" class="d-inline-block align-top" alt="logo">
 </div>
 <div class="text-center">
-    <h1 class="display-4">Olá, User9999</h1>
+	<h1 class="display-4">Olá, User9999</h1>
 	<br>
 	<h4>Esta é a plataforma de importações dos Integradores Infotur</h4>
 	<br>
@@ -18,7 +18,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
-			<button class="btn btn-primary w-100">Importar de todos os Integradores cadastrados</button>
+			<a asp-action="Importar" class="btn btn-primary w-100">Importar de todos os Integradores cadastrados</a>
+
 		</div>
 		<div class="col">
 			<button class="btn btn-secondary" onclick="window.location.href='@Url.Action("Menu", "Home")'">Cadastros</button>
