@@ -59,7 +59,7 @@ public class IntegradorDoUsuarioService : IIntegradorDoUsuarioService
 
 	public async Task Atualizar(int id, IntegradorDoUsuario item)
 	{
-		string url = $"{Endpoints.IntegradoresDoUsuario.Descricao()}";
+		string url = $"{Endpoints.IntegradoresDoUsuario.Descricao()}?id={id}";
 
 		var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
 

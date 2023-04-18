@@ -25,9 +25,9 @@ public class GrupoService : IGrupoService
 		var response = await _httpClient.GetAsync(url);
 
 		if (!response.IsSuccessStatusCode)
-            throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
 
-        var grupos = JsonConvert.DeserializeObject<IEnumerable<Grupo>>(await response.Content.ReadAsStringAsync());
+		var grupos = JsonConvert.DeserializeObject<IEnumerable<Grupo>>(await response.Content.ReadAsStringAsync());
 
 		return grupos;
 	}
@@ -50,33 +50,33 @@ public class GrupoService : IGrupoService
 	{
 		string url = $"{Endpoints.Grupos.Descricao()}";
 
-        var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
+		var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
 
-        var response = await _httpClient.PostAsync(url, content);
+		var response = await _httpClient.PostAsync(url, content);
 
-        if (!response.IsSuccessStatusCode)
-            throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
-    }
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
+	}
 
 	public async Task Atualizar(int id, Grupo item)
 	{
-        string url = $"{Endpoints.Grupos.Descricao()}";
+		string url = $"{Endpoints.Grupos.Descricao()}?id={id}";
 
-        var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
+		var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
 
-        var response = await _httpClient.PutAsync(url, content);
+		var response = await _httpClient.PutAsync(url, content);
 
-        if (!response.IsSuccessStatusCode)
-            throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
-    }
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
+	}
 
 	public async Task Remover(int id)
 	{
-        string url = $"{Endpoints.Grupos.Descricao()}?id={id}";
+		string url = $"{Endpoints.Grupos.Descricao()}?id={id}";
 
-        var response = await _httpClient.DeleteAsync(url);
+		var response = await _httpClient.DeleteAsync(url);
 
-        if (!response.IsSuccessStatusCode)
-            throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
-    }
+		if (!response.IsSuccessStatusCode)
+			throw new Exception($"Status Code: {response.StatusCode} - Erro ao chamar API: {url}");
+	}
 }

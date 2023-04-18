@@ -3,7 +3,6 @@
 public class Integrador
 {
 	public int Id { get; set; }
-	public int IntegradorId { get; set; }
 	public string IntegradorNome { get; set; }
 	public string GrupoUser { get; set; }
 	public string GrupoPassword { get; set; }

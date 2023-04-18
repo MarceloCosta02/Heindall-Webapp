@@ -48,7 +48,7 @@ public class UsuariosController : Controller
 	// POST: Usuarios/Create
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Create([Bind("Id,UsuarioId,UsuarioName,UsuarioIDAgencia,UsuarioCNPJ,UsuarioNivel,UsuarioBancoDestino")] Usuario usuario)
+	public async Task<IActionResult> Create([Bind("Cnpj,Nivel,NomeEmpresa,HostBd,UserBd,SenhaBd,PortaBd,SchemaBd")] Usuario usuario)
 	{
 		if (ModelState.IsValid)
 		{
@@ -76,7 +76,7 @@ public class UsuariosController : Controller
 	// POST: Usuarios/Edit/5
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,UsuarioName,UsuarioIDAgencia,UsuarioCNPJ,UsuarioNivel,UsuarioBancoDestino")] Usuario usuario)
+	public async Task<IActionResult> Edit(int id, [Bind("Id,Cnpj,Nivel,NomeEmpresa,HostBd,UserBd,SenhaBd,PortaBd,SchemaBd")] Usuario usuario)
 	{
 		if (id != usuario.Id)
 			return NotFound("Ids divergentes");

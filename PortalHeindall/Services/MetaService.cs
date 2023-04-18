@@ -60,7 +60,7 @@ public class MetaService : IMetaService
 
 	public async Task Atualizar(int id, Meta item)
 	{
-		string url = $"{Endpoints.Metas.Descricao()}";
+		string url = $"{Endpoints.Metas.Descricao()}?id={id}";
 
 		var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
 

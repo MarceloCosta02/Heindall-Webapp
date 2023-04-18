@@ -31,16 +31,16 @@ public class IntegradoresController : Controller
 	// GET: Integradores/Details/5
 	public async Task<IActionResult> Details(int? id)
 	{
-        if (id == null)
-            return BadRequest("Id não pode ser nulo");
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
 
-        var integrador = await _integradorService.ObterPorId(id.Value);
+		var integrador = await _integradorService.ObterPorId(id.Value);
 
-        if (integrador == null)
-            return NotFound($"Não foi encontrado um integrador com id {id}");
+		if (integrador == null)
+			return NotFound($"Não foi encontrado um integrador com id {id}");
 
-        return View(integrador);
-    }
+		return View(integrador);
+	}
 
 	// GET: Integradores/Create
 	public async Task<IActionResult> Create()
@@ -52,87 +52,87 @@ public class IntegradoresController : Controller
 	// POST: Integradores/Create
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Create([Bind("Id,IntegradorId,IntegradorNome,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey,GrupoId")] Integrador integrador)
+	public async Task<IActionResult> Create([Bind("IntegradorNome,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey,GrupoId")] Integrador integrador)
 	{
 		if (ModelState.IsValid)
 		{
-            await _integradorService.Criar(integrador);
+			await _integradorService.Criar(integrador);
 			return RedirectToAction(nameof(Index));
 		}
 
-        ViewData["GrupoId"] = new SelectList(await _grupoService.Obter(), "Id", "Id");
-        
+		ViewData["GrupoId"] = new SelectList(await _grupoService.Obter(), "Id", "Id");
+		
 		return View(integrador);
 	}
 
 	// GET: Integradores/Edit/5
 	public async Task<IActionResult> Edit(int? id)
 	{
-        if (id == null)
-            return BadRequest("Id não pode ser nulo");
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
 
-        var integrador = await _integradorService.ObterPorId(id.Value);
+		var integrador = await _integradorService.ObterPorId(id.Value);
 
-        if (integrador == null)
-            return NotFound($"Não foi encontrado um integrador com id {id}");
+		if (integrador == null)
+			return NotFound($"Não foi encontrado um integrador com id {id}");
 
-        ViewData["GrupoId"] = new SelectList(await _grupoService.Obter(), "Id", "Id");
+		ViewData["GrupoId"] = new SelectList(await _grupoService.Obter(), "Id", "Id");
 
-        return View(integrador);
+		return View(integrador);
 	}
 
 	// POST: Integradores/Edit/5
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Edit(int id, [Bind("Id,IntegradorId,IntegradorNome,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey,GrupoId")] Integrador integrador)
+	public async Task<IActionResult> Edit(int id, [Bind("Id,IntegradorNome,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey,GrupoId")] Integrador integrador)
 	{
 		if (id != integrador.Id)
-            return NotFound("Ids divergentes");
+			return NotFound("Ids divergentes");
 
-        if (ModelState.IsValid)
+		if (ModelState.IsValid)
 		{
 			try
 			{
-                await _integradorService.Atualizar(id, integrador);
+				await _integradorService.Atualizar(id, integrador);
 			}
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
 
-            return RedirectToAction(nameof(Index));
-        }
-        ViewData["GrupoId"] = new SelectList(await _grupoService.Obter(), "Id", "Id");
-       
+			return RedirectToAction(nameof(Index));
+		}
+		ViewData["GrupoId"] = new SelectList(await _grupoService.Obter(), "Id", "Id");
+	   
 		return View(integrador);
 	}
 
 	// GET: Integradores/Delete/5
 	public async Task<IActionResult> Delete(int? id)
 	{
-        if (id == null)
-            return BadRequest("Id não pode ser nulo");
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
 
-        var integrador = await _integradorService.ObterPorId(id.Value);
+		var integrador = await _integradorService.ObterPorId(id.Value);
 
-        if (integrador == null)
-            return NotFound($"Não foi encontrado um integrador com id {id}");
+		if (integrador == null)
+			return NotFound($"Não foi encontrado um integrador com id {id}");
 
-        return View(integrador);
-    }
+		return View(integrador);
+	}
 
 	// POST: Integradores/Delete/5
 	[HttpPost, ActionName("Delete")]
 	[ValidateAntiForgeryToken]
 	public async Task<IActionResult> DeleteConfirmed(int id)
 	{
-        var integrador = await _integradorService.ObterPorId(id);
+		var integrador = await _integradorService.ObterPorId(id);
 
-        if (integrador != null)
-        {
-            await _integradorService.Remover(id);
-        }
+		if (integrador != null)
+		{
+			await _integradorService.Remover(id);
+		}
 
-        return RedirectToAction(nameof(Index));
-    }
+		return RedirectToAction(nameof(Index));
+	}
 }

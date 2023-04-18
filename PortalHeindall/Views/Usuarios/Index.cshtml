@@ -13,53 +13,66 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UsuarioId)
+                @Html.DisplayNameFor(model => model.NomeEmpresa)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsuarioName)
+                @Html.DisplayNameFor(model => model.HostBd)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsuarioIDAgencia)
+                @Html.DisplayNameFor(model => model.Cnpj)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsuarioCNPJ)
+                @Html.DisplayNameFor(model => model.Nivel)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsuarioNivel)
+                @Html.DisplayNameFor(model => model.UserBd)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsuarioBancoDestino)
+                @Html.DisplayNameFor(model => model.SenhaBd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PortaBd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchemaBd)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioIDAgencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioCNPJ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioNivel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioBancoDestino)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeEmpresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HostBd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nivel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserBd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SenhaBd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PortaBd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SchemaBd)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

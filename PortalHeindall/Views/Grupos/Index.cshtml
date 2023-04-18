@@ -11,7 +11,7 @@
         </div>
         <h1 class="mb-0">Grupos</h1>
         <div>
-            <a class="btn btn-primary" href="/Grupo/Create">Novo Grupo</a>
+            <a asp-action="Create" class="btn btn-primary">Novo Grupo</a>
         </div>
     </div>
 
@@ -23,6 +23,7 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Tipo</th>
+                    <th scope="col">Area</th>
                     <th scope="col">Método</th>
                     <th scope="col">URL</th>
                     <th scope="col">Usuário</th>
@@ -40,6 +41,7 @@
                         <td>@Html.DisplayFor(modelItem => item.GrupoName)</td>
                         <td>@Html.DisplayFor(modelItem => item.GrupoDescription)</td>
                         <td>@Html.DisplayFor(modelItem => item.GrupoType)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GrupoArea)</td>
                         <td>@Html.DisplayFor(modelItem => item.GrupoMetodo)</td>
                         <td>@Html.DisplayFor(modelItem => item.GrupoURL)</td>
                         <td>@Html.DisplayFor(modelItem => item.GrupoUser)</td>
