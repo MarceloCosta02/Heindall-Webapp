@@ -11,24 +11,21 @@
 </p>
 <table class="table">
     <thead>
-        <tr>         
+        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.IntegradorNome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GrupoUser)
+                @Html.DisplayNameFor(model => model.IntegradorGrupo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GrupoPassword)
+                @Html.DisplayNameFor(model => model.IntegradorEndpoint)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GrupoPort)
+                @Html.DisplayNameFor(model => model.IntegradorPublicKey)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PublicKey)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrivateKey)
+                @Html.DisplayNameFor(model => model.IntegradorPrivateKey)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Grupo)
@@ -37,35 +34,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>          
-            <td>
-                @Html.DisplayFor(modelItem => item.IntegradorNome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GrupoUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GrupoPassword)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GrupoPort)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublicKey)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrivateKey)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Grupo.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IntegradorNome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IntegradorGrupo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IntegradorEndpoint)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IntegradorPublicKey)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IntegradorPrivateKey)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grupo.Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -52,7 +52,7 @@ public class IntegradoresController : Controller
 	// POST: Integradores/Create
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Create([Bind("IntegradorNome,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey,GrupoId")] Integrador integrador)
+	public async Task<IActionResult> Create([Bind("IntegradorNome,IntegradorGrupo,IntegradorEndpoint,IntegradorPublicKey,IntegradorPrivateKey,GrupoId")] Integrador integrador)
 	{
 		if (ModelState.IsValid)
 		{
@@ -84,7 +84,7 @@ public class IntegradoresController : Controller
 	// POST: Integradores/Edit/5
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Edit(int id, [Bind("Id,IntegradorNome,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey,GrupoId")] Integrador integrador)
+	public async Task<IActionResult> Edit(int id, [Bind("Id,IntegradorNome,IntegradorGrupo,IntegradorEndpoint,IntegradorPublicKey,IntegradorPrivateKey,GrupoId")] Integrador integrador)
 	{
 		if (id != integrador.Id)
 			return NotFound("Ids divergentes");
