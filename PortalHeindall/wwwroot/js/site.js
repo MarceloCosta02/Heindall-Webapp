@@ -1,4 +1,17 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+$('#importar').click(function (event) {
+    // Previna que o link redirecione para outra página
+    event.preventDefault();
 
-// Write your JavaScript code.
+    // Realize uma requisição AJAX POST para o endpoint da sua API
+    $.ajax({
+        url: '/Home/Importar',
+        type: 'POST',
+        success: function (result) {
+            // Faça algo com o resultado retornado pela API
+        },
+        error: function (xhr, status, error) {
+            // Trate os erros que podem ocorrer durante a requisição
+        }
+    });
+});

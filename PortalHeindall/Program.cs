@@ -27,6 +27,7 @@ builder.Services.AddHttpClient<IUsuarioService, UsuarioService>(services =>
 builder.Services.AddHttpClient<IImportacaoService, ImportacaoService>(services =>
 			services.BaseAddress = new Uri(builder.Configuration.GetSection("AppSettings:UrlLocal").Value));
 
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

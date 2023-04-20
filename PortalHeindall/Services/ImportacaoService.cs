@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
 using System.Text;
 using System.Net.Http.Headers;
+using AppHeindall.Models.Requests;
 
 namespace AppHeindall.Services;
 
@@ -23,7 +24,7 @@ public class ImportacaoService : IImportacaoService
 		string url = $"{Endpoints.ImportacaoRextur.Descricao()}";
 		var dateNow = DateTime.Now.ToString("yyyyMMdd");
 
-		var content = new StringContent(JsonConvert.SerializeObject(dateNow), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
+		var content = new StringContent(JsonConvert.SerializeObject(new ImportacaoRexturRequest(dateNow)), Encoding.UTF8, mediaType: new MediaTypeHeaderValue("application/json"));
 
 		var response = await _httpClient.PostAsync(url, content);
 

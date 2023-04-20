@@ -30,11 +30,12 @@ public class HomeController : Controller
 		return View();
 	}
 
-	public IActionResult Importar()
+	[HttpPost]
+	public async Task<IActionResult> Importar()
 	{
 		try
 		{
-			_service.ImportacaoRextur();
+			await _service.ImportacaoRextur();
 			return View("Index");
 		}
 		catch (Exception ex)
