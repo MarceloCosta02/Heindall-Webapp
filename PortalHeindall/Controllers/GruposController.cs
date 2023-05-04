@@ -1,163 +1,128 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AppHeindall.Interfaces;
+using AppHeindall.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using PortalHeindall.Data;
-using PortalHeindall.Models;
 
-namespace PortalHeindall.Controllers
+namespace AppHeindall.Controllers;
+
+public class GruposController : Controller
 {
-    public class GruposController : Controller
-    {
-        private readonly GrupoContext _context;
+	private readonly IGrupoService _service;
 
-        public GruposController(GrupoContext context)
-        {
-            _context = context;
-        }
+	public GruposController(IGrupoService service)
+	{
+		_service = service;
+	}
 
-        // GET: Grupos
-        public async Task<IActionResult> Index()
-        {
-              return _context.Grupos != null ? 
-                          View(await _context.Grupos.ToListAsync()) :
-                          Problem("Entity set 'GrupoContext.Grupos'  is null.");
-        }
+	// GET: Grupos
+	public async Task<IActionResult> Index()
+	{
+		var grupos = await _service.Obter();
 
-        // GET: Grupos/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Grupos == null)
-            {
-                return NotFound();
-            }
+		if (grupos is null)
+			return Problem("Não existem grupos a serem exibidos");
 
-            var grupo = await _context.Grupos
-                .FirstOrDefaultAsync(m => m.GrupoId == id);
-            if (grupo == null)
-            {
-                return NotFound();
-            }
+		return View(grupos);
+	}
 
-            return View(grupo);
-        }
+	// GET: Grupos/Details/5
+	public async Task<IActionResult> Details(int? id)
+	{
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
 
-        // GET: Grupos/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+		var grupo = await _service.ObterPorId(id.Value);
 
-        // POST: Grupos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GrupoId,GrupoName,GrupoDescription,GrupoType,GrupoMetodo,GrupoURL,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey")] Grupo grupo)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(grupo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(grupo);
-        }
+		if (grupo == null)
+			return NotFound($"Não foi encontrado um grupo com id {id}");
 
-        // GET: Grupos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Grupos == null)
-            {
-                return NotFound();
-            }
+		return View(grupo);
+	}
 
-            var grupo = await _context.Grupos.FindAsync(id);
-            if (grupo == null)
-            {
-                return NotFound();
-            }
-            return View(grupo);
-        }
+	// GET: Grupos/Create
+	public IActionResult Create()
+	{
+		return View();
+	}
 
-        // POST: Grupos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GrupoId,GrupoName,GrupoDescription,GrupoType,GrupoMetodo,GrupoURL,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey")] Grupo grupo)
-        {
-            if (id != grupo.GrupoId)
-            {
-                return NotFound();
-            }
+	// POST: Grupos/Create
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> Create([Bind("GrupoName,GrupoDescription,GrupoType,GrupoArea,GrupoMetodo,GrupoURL,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey")] Grupo grupo)
+	{
+		if (ModelState.IsValid)
+		{
+			await _service.Criar(grupo);
+			return RedirectToAction(nameof(Index));
+		}
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(grupo);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!GrupoExists(grupo.GrupoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(grupo);
-        }
+		return View(grupo);
+	}
 
-        // GET: Grupos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Grupos == null)
-            {
-                return NotFound();
-            }
+	// GET: Grupos/Edit/5
+	public async Task<IActionResult> Edit(int? id)
+	{
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
 
-            var grupo = await _context.Grupos
-                .FirstOrDefaultAsync(m => m.GrupoId == id);
-            if (grupo == null)
-            {
-                return NotFound();
-            }
+		var grupo = await _service.ObterPorId(id.Value);
 
-            return View(grupo);
-        }
+		if (grupo == null)
+			return NotFound($"Não foi encontrado um grupo com id {id}");
 
-        // POST: Grupos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Grupos == null)
-            {
-                return Problem("Entity set 'GrupoContext.Grupos'  is null.");
-            }
-            var grupo = await _context.Grupos.FindAsync(id);
-            if (grupo != null)
-            {
-                _context.Grupos.Remove(grupo);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+		return View(grupo);
+	}
 
-        private bool GrupoExists(int id)
-        {
-          return (_context.Grupos?.Any(e => e.GrupoId == id)).GetValueOrDefault();
-        }
-    }
+	// POST: Grupos/Edit/5
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> Edit(int id, [Bind("Id,GrupoName,GrupoDescription,GrupoType,GrupoArea,GrupoMetodo,GrupoURL,GrupoUser,GrupoPassword,GrupoPort,PublicKey,PrivateKey")] Grupo grupo)
+	{
+		if (id != grupo.Id)		
+			return NotFound("Ids divergentes");		
+
+		if (ModelState.IsValid)
+		{
+			try
+			{
+				await _service.Atualizar(id, grupo);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+
+			return RedirectToAction(nameof(Index));
+		}
+
+		return View(grupo);
+	}
+
+	// GET: Grupos/Delete/5
+	public async Task<IActionResult> Delete(int? id)
+	{
+		if (id == null)
+			return BadRequest("Id não pode ser nulo");
+
+		var grupo = await _service.ObterPorId(id.Value);
+
+		if (grupo == null)
+			return NotFound($"Não foi encontrado um grupo com id {id}");
+
+		return View(grupo);
+	}
+
+	// POST: Grupos/Delete/5
+	[HttpPost, ActionName("Delete")]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> DeleteConfirmed(int id)
+	{
+		var grupo = await _service.ObterPorId(id);
+		
+		if (grupo != null)
+		{
+			await _service.Remover(id);
+		}
+
+		return RedirectToAction(nameof(Index));
+	}
 }

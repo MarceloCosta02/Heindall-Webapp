@@ -1,4 +1,4 @@
-﻿@model PortalHeindall.Models.Usuario
+﻿@model AppHeindall.Models.Usuario
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,34 +14,44 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="UsuarioId" class="control-label"></label>
-                <input asp-for="UsuarioId" class="form-control" />
-                <span asp-validation-for="UsuarioId" class="text-danger"></span>
+                <label asp-for="NomeEmpresa" class="control-label"></label>
+                <input asp-for="NomeEmpresa" class="form-control" />
+                <span asp-validation-for="NomeEmpresa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UsuarioName" class="control-label"></label>
-                <input asp-for="UsuarioName" class="form-control" />
-                <span asp-validation-for="UsuarioName" class="text-danger"></span>
+                <label asp-for="HostBd" class="control-label"></label>
+                <input asp-for="HostBd" class="form-control" />
+                <span asp-validation-for="HostBd" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UsuarioIDAgencia" class="control-label"></label>
-                <input asp-for="UsuarioIDAgencia" class="form-control" />
-                <span asp-validation-for="UsuarioIDAgencia" class="text-danger"></span>
+                <label asp-for="Cnpj" class="control-label"></label>
+                <input asp-for="Cnpj" class="form-control" />
+                <span asp-validation-for="Cnpj" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UsuarioCNPJ" class="control-label"></label>
-                <input asp-for="UsuarioCNPJ" class="form-control" />
-                <span asp-validation-for="UsuarioCNPJ" class="text-danger"></span>
+                <label asp-for="Nivel" class="control-label"></label>
+                <input asp-for="Nivel" class="form-control" />
+                <span asp-validation-for="Nivel" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UsuarioNivel" class="control-label"></label>
-                <input asp-for="UsuarioNivel" class="form-control" />
-                <span asp-validation-for="UsuarioNivel" class="text-danger"></span>
+                <label asp-for="UserBd" class="control-label"></label>
+                <input asp-for="UserBd" class="form-control" />
+                <span asp-validation-for="UserBd" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UsuarioBancoDestino" class="control-label"></label>
-                <input asp-for="UsuarioBancoDestino" class="form-control" />
-                <span asp-validation-for="UsuarioBancoDestino" class="text-danger"></span>
+                <label asp-for="SenhaBd" class="control-label"></label>
+                <input asp-for="SenhaBd" class="form-control" />
+                <span asp-validation-for="SenhaBd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PortaBd" class="control-label"></label>
+                <input asp-for="PortaBd" class="form-control" />
+                <span asp-validation-for="PortaBd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SchemaBd" class="control-label"></label>
+                <input asp-for="SchemaBd" class="form-control" />
+                <span asp-validation-for="SchemaBd" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -55,5 +65,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -1,4 +1,4 @@
-﻿@model PortalHeindall.Models.Integrador
+﻿@model AppHeindall.Models.Integrador
 
 @{
     ViewData["Title"] = "Details";
@@ -9,13 +9,7 @@
 <div>
     <h4>Integrador</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IntegradorId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IntegradorId)
-        </dd>
+    <dl class="row">     
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IntegradorNome)
         </dt>
@@ -23,35 +17,29 @@
             @Html.DisplayFor(model => model.IntegradorNome)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GrupoUser)
+            @Html.DisplayNameFor(model => model.IntegradorGrupo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GrupoUser)
+            @Html.DisplayFor(model => model.IntegradorGrupo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GrupoPassword)
+            @Html.DisplayNameFor(model => model.IntegradorEndpoint)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GrupoPassword)
+            @Html.DisplayFor(model => model.IntegradorEndpoint)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GrupoPort)
+            @Html.DisplayNameFor(model => model.IntegradorPublicKey)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GrupoPort)
+            @Html.DisplayFor(model => model.IntegradorPublicKey)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PublicKey)
+            @Html.DisplayNameFor(model => model.IntegradorPrivateKey)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PublicKey)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrivateKey)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrivateKey)
-        </dd>
+            @Html.DisplayFor(model => model.IntegradorPrivateKey)
+        </dd>      
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Grupo)
         </dt>

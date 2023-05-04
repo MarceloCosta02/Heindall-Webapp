@@ -1,4 +1,4 @@
-﻿@model PortalHeindall.Models.Usuario
+﻿@model AppHeindall.Models.Usuario
 
 @{
     ViewData["Title"] = "Details";
@@ -10,41 +10,53 @@
     <h4>Usuario</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioId)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NomeEmpresa)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NomeEmpresa)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioName)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HostBd)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioName)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HostBd)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioIDAgencia)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cnpj)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioIDAgencia)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cnpj)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioCNPJ)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nivel)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioCNPJ)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nivel)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioNivel)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserBd)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioNivel)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserBd)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioBancoDestino)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SenhaBd)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioBancoDestino)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SenhaBd)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PortaBd)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PortaBd)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SchemaBd)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SchemaBd)
         </dd>
     </dl>
 </div>

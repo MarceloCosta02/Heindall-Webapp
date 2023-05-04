@@ -1,4 +1,4 @@
-﻿@model PortalHeindall.Models.Integrador
+﻿@model AppHeindall.Models.Integrador
 
 @{
     ViewData["Title"] = "Create";
@@ -11,41 +11,31 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IntegradorId" class="control-label"></label>
-                <input asp-for="IntegradorId" class="form-control" />
-                <span asp-validation-for="IntegradorId" class="text-danger"></span>
-            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>  
             <div class="form-group">
                 <label asp-for="IntegradorNome" class="control-label"></label>
                 <input asp-for="IntegradorNome" class="form-control" />
                 <span asp-validation-for="IntegradorNome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GrupoUser" class="control-label"></label>
-                <input asp-for="GrupoUser" class="form-control" />
-                <span asp-validation-for="GrupoUser" class="text-danger"></span>
+                <label asp-for="IntegradorGrupo" class="control-label"></label>
+                <input asp-for="IntegradorGrupo" class="form-control" />
+                <span asp-validation-for="IntegradorGrupo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GrupoPassword" class="control-label"></label>
-                <input asp-for="GrupoPassword" class="form-control" />
-                <span asp-validation-for="GrupoPassword" class="text-danger"></span>
+                <label asp-for="IntegradorEndpoint" class="control-label"></label>
+                <input asp-for="IntegradorEndpoint" class="form-control" />
+                <span asp-validation-for="IntegradorEndpoint" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GrupoPort" class="control-label"></label>
-                <input asp-for="GrupoPort" class="form-control" />
-                <span asp-validation-for="GrupoPort" class="text-danger"></span>
+                <label asp-for="IntegradorPublicKey" class="control-label"></label>
+                <input asp-for="IntegradorPublicKey" class="form-control" />
+                <span asp-validation-for="IntegradorPublicKey" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PublicKey" class="control-label"></label>
-                <input asp-for="PublicKey" class="form-control" />
-                <span asp-validation-for="PublicKey" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrivateKey" class="control-label"></label>
-                <input asp-for="PrivateKey" class="form-control" />
-                <span asp-validation-for="PrivateKey" class="text-danger"></span>
+                <label asp-for="IntegradorPrivateKey" class="control-label"></label>
+                <input asp-for="IntegradorPrivateKey" class="form-control" />
+                <span asp-validation-for="IntegradorPrivateKey" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GrupoId" class="control-label"></label>

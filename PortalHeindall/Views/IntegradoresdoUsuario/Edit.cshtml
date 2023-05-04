@@ -1,4 +1,4 @@
-﻿@model PortalHeindall.Models.IntegradordoUsuario
+﻿@model AppHeindall.Models.IntegradorDoUsuario
 
 @{
     ViewData["Title"] = "Edit";
@@ -22,6 +22,36 @@
                 <label asp-for="IntegradorId" class="control-label"></label>
                 <select asp-for="IntegradorId" class="form-control" asp-items="ViewBag.IntegradorId"></select>
                 <span asp-validation-for="IntegradorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioIdAgencia" class="control-label"></label>
+                <input asp-for="UsuarioIdAgencia" class="form-control" />
+                <span asp-validation-for="UsuarioIdAgencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoginIntegradorUsuario" class="control-label"></label>
+                <input asp-for="LoginIntegradorUsuario" class="form-control" />
+                <span asp-validation-for="LoginIntegradorUsuario" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="SenhaIntegradorUsuario" class="control-label"></label>
+                <input asp-for="SenhaIntegradorUsuario" class="form-control" />
+                <span asp-validation-for="SenhaIntegradorUsuario" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="PortaIntegradorUsuario" class="control-label"></label>
+                <input asp-for="PortaIntegradorUsuario" class="form-control" />
+                <span asp-validation-for="PortaIntegradorUsuario" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="PublicKeyIntegradorUsuario" class="control-label"></label>
+                <input asp-for="PublicKeyIntegradorUsuario" class="form-control" />
+                <span asp-validation-for="PublicKeyIntegradorUsuario" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="PrivateKeyIntegradorUsuario" class="control-label"></label>
+                <input asp-for="PrivateKeyIntegradorUsuario" class="form-control" />
+                <span asp-validation-for="PrivateKeyIntegradorUsuario" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
